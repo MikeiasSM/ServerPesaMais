@@ -17,8 +17,8 @@ public class StateResource {
 	@Autowired
 	private StateService service;
 	
-	@RequestMapping(params = "{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> findById(@PathVariable Integer id){
+	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	public ResponseEntity<State> find(@PathVariable Integer id){
 		State state = service.findById(id);
 		return ResponseEntity.ok(state);
 	}

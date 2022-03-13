@@ -1,12 +1,17 @@
 package br.com.plenustech.pesamais.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class State implements Serializable{
@@ -17,6 +22,9 @@ public class State implements Serializable{
 	private Integer id_estate;
 	private String name;
 	private String uf;
+	@JsonBackReference
+	@OneToMany(mappedBy = "state")
+	private List<City> cities = new ArrayList<>();
 	
 	public State() {
 		super();
@@ -51,6 +59,14 @@ public class State implements Serializable{
 	
 	public void setUf(String uf) {
 		this.uf = uf;
+	}
+
+	public List<City> getCities() {
+		return cities;
+	}
+
+	public void setCities(List<City> cities) {
+		this.cities = cities;
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.plenustech.pesamais.domain.State;
 import br.com.plenustech.pesamais.repositories.StateRepository;
+import br.com.plenustech.pesamais.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class StateService {
@@ -16,6 +17,8 @@ public class StateService {
 	
 	public State findById(Integer id) {
 		Optional<State> state = repository.findById(id);
-		return state.orElse(null);		
+		return state.orElseThrow(() -> new ObjectNotFoundException(
+				"State "+ id +" not found. Type: "+ State.class.getName())
+		);		
 	}
 }
