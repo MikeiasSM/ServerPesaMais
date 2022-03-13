@@ -42,7 +42,14 @@ public class ServerPesaMaisApplication implements CommandLineRunner{
 		User user1 = new User(null, "SUPORTE", "1234", "suporte@email.com", true);
 		User user2 = new User(null, "ADM", "1234", "adm@email.com", true);
 		User user3 = new User(null, "SUPERVIDOR", "1234", "super@email.com", true);
-		userrepo.saveAll(Arrays.asList(user1, user2, user3));
+		User user4 = new User(null, "FULANO 1", "14", "super@email.com", true);
+		User user5 = new User(null, "FULANO 2", "134", "super@email.com", true);
+		User user6 = new User(null, "FULANO 3", "124", "super@email.com", true);
+		User user7 = new User(null, "FULANO 4", "234", "super@email.com", true);
+		User user8 = new User(null, "FULANO 5", "134", "super@email.com", true);
+		User user9 = new User(null, "FULANO 6", "123", "super@email.com", true);
+		User user10 = new User(null, "FULANO 7", "124", "super@email.com", true);
+		userrepo.saveAll(Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10));
 		
 		State state1 = new State(null, "MATO GROSSO", "MT");
 		State state2 = new State(null, "MATO GROSSO DO SUL", "MS");

@@ -1,11 +1,25 @@
 package br.com.plenustech.pesamais.domain.dto;
 
+import java.io.Serializable;
+
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import br.com.plenustech.pesamais.domain.User;
 
-public class UserDTO {
-
+public class UserDTO implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private Integer id_user;
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Length(min = 5, max = 40, message = "A campo deve conter entre 5 e 40 caracteres")
 	private String name;
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Length(min = 1, max = 40, message = "A campo deve conter entre 5 e 40 caracteres")
+	private String password;
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Length(min = 5, max = 40, message = "A campo deve conter entre 5 e 40 caracteres")
 	private String email;
 	private Boolean active;
 	
@@ -16,6 +30,7 @@ public class UserDTO {
 	public UserDTO(User obj) {
 		this.id_user = obj.getId_user();
 		this.name = obj.getName();
+		this.password = obj.getPassword();
 		this.email = obj.getEmail();
 		this.active = obj.getActive();
 	}
@@ -34,6 +49,14 @@ public class UserDTO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getEmail() {
