@@ -1,70 +1,67 @@
-package br.com.plenustech.pesamais.domain;
+package br.com.plenustech.pesamais.domain.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
-import br.com.plenustech.pesamais.domain.enums.TypePerson;
+import org.hibernate.validator.constraints.Length;
 
-@Entity
-@Table(name = "PESSOA")
-public class Person implements Serializable{
+import br.com.plenustech.pesamais.domain.Person;
+import br.com.plenustech.pesamais.services.validation.PersonUpdate;
+
+@PersonUpdate
+public class PersonDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_person;
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Length(min = 5, max = 80, message = "A campo deve conter entre 5 e 80 caracteres")
 	private String name_reason;
+	@Length(max = 80, message = "A campo deve conter no máximo 80 caracteres")
 	private String surname_fantasy;
+	@Length(max = 15, message = "A campo deve conter no máximo 15 caracteres")
 	private String cpf_cnpj;
+	@Length(max = 15, message = "A campo deve conter no máximo 15 caracteres")
 	private String rg_inscr;
 	private String fone1;
 	private String fone2;
+	@Length(max = 40, message = "A campo deve conter no máximo 40 caracteres")
 	private String contact1;
+	@Length(max = 40, message = "A campo deve conter no máximo 40 caracteres")
 	private String contact2;
+	@Email(message = "E-mail inválido")
 	private String email;
+	@Length(max = 250, message = "A campo deve conter no máximo 250 caracteres")
 	private String note;
 	private Integer type_person; 
 	private Boolean flag_register_cliente;
 	private Boolean flag_register_fornecedor;
 	private Boolean flag_register_colaborador;
 	private Boolean flag_active;
-	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-	private List<Address> addresses = new ArrayList<>();
-
-	public Person () {
-		
-	}
 	
-	public Person(Integer id_person, String name_reason, String surname_fantasy, String cpf_cnpj, String rg_inscr, String fone1, String fone2, String contact1, 
-				  String contact2, String email, String note, TypePerson type_person, Boolean flag_register_cliente, Boolean flag_register_fornecedor, 
-				  Boolean flag_register_colaborador, Boolean flag_active) {
+	public PersonDTO() {
 		super();
-		this.id_person = id_person;
-		this.name_reason = name_reason;
-		this.surname_fantasy = surname_fantasy;
-		this.cpf_cnpj = cpf_cnpj;
-		this.rg_inscr = rg_inscr;
-		this.fone1 = fone1;
-		this.fone2 = fone2;
-		this.contact1 = contact1;
-		this.contact2 = contact2;
-		this.email = email;
-		this.note = note;
-		this.type_person = type_person.getCod();
-		this.flag_register_cliente = flag_register_cliente;
-		this.flag_register_fornecedor = flag_register_fornecedor;
-		this.flag_register_colaborador = flag_register_colaborador;
-		this.flag_active = flag_active;
+	}
+
+	public PersonDTO(Person obj) {
+		super();
+		this.id_person = obj.getId_person();
+		this.name_reason = obj.getName_reason();
+		this.surname_fantasy = obj.getSurname_fantasy();
+		this.cpf_cnpj = obj.getCpf_cnpj();
+		this.rg_inscr = obj.getRg_inscr();
+		this.fone1 = obj.getFone1();
+		this.fone2 = obj.getFone2();
+		this.contact1 = obj.getContact1();
+		this.contact2 = obj.getContact2();
+		this.email = obj.getEmail();
+		this.note = obj.getNote();
+		this.type_person = obj.getTypePerson().getCod();
+		this.flag_register_cliente = obj.getFlag_register_cliente();
+		this.flag_register_fornecedor = obj.getFlag_register_fornecedor();
+		this.flag_register_colaborador = obj.getFlag_register_colaborador();
+		this.flag_active = obj.getFlag_active();
 	}
 
 	public Integer getId_person() {
@@ -155,12 +152,12 @@ public class Person implements Serializable{
 		this.note = note;
 	}
 
-	public TypePerson getTypePerson() {
-		return TypePerson.toEnum(type_person);
+	public Integer getType_person() {
+		return type_person;
 	}
 
-	public void setTypePerson(TypePerson type_person) {
-		this.type_person = type_person.getCod();
+	public void setType_person(Integer type_person) {
+		this.type_person = type_person;
 	}
 
 	public Boolean getFlag_register_cliente() {
@@ -193,31 +190,6 @@ public class Person implements Serializable{
 
 	public void setFlag_active(Boolean flag_active) {
 		this.flag_active = flag_active;
-	}
-
-	public List<Address> getAddresses() {
-		return addresses;
-	}
-
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id_person);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Person other = (Person) obj;
-		return Objects.equals(id_person, other.id_person);
 	}
 	
 }

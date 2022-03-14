@@ -10,19 +10,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "ESTADO")
 public class State implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id_estate;
+	private Integer id_state;
 	private String name;
 	private String uf;
-	@JsonBackReference
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "state")
 	private List<City> cities = new ArrayList<>();
 	
@@ -30,19 +33,19 @@ public class State implements Serializable{
 		super();
 	}
 	
-	public State(Integer id_estate, String name, String uf) {
+	public State(Integer id_state, String name, String uf) {
 		super();
-		this.id_estate = id_estate;
+		this.id_state = id_state;
 		this.name = name;
 		this.uf = uf;
 	}
 	
-	public Integer getId_estate() {
-		return id_estate;
+	public Integer getId_state() {
+		return id_state;
 	}
 	
-	public void setId_estate(Integer id_estate) {
-		this.id_estate = id_estate;
+	public void setId_state(Integer id_state) {
+		this.id_state = id_state;
 	}
 	
 	public String getName() {
@@ -71,7 +74,7 @@ public class State implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id_estate);
+		return Objects.hash(id_state);
 	}
 
 	@Override
@@ -83,7 +86,7 @@ public class State implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		State other = (State) obj;
-		return Objects.equals(id_estate, other.id_estate);
+		return Objects.equals(id_state, other.id_state);
 	}
 	
 }

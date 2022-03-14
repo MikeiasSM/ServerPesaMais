@@ -9,10 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "CIDADE")
 public class City implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -20,7 +20,7 @@ public class City implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_city;
 	private String name;
-	@JsonManagedReference
+
 	@ManyToOne
 	@JoinColumn(name="id_state", nullable = false)
 	private State state;

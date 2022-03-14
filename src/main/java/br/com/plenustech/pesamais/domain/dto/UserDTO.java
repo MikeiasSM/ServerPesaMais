@@ -16,10 +16,10 @@ public class UserDTO implements Serializable{
 	@Length(min = 5, max = 40, message = "A campo deve conter entre 5 e 40 caracteres")
 	private String name;
 	@NotEmpty(message = "Preenchimento obrigatório")
-	@Length(min = 1, max = 40, message = "A campo deve conter entre 5 e 40 caracteres")
+	@Length(min = 1, max = 40, message = "A campo deve conter entre 1 e 40 caracteres")
 	private String password;
 	@NotEmpty(message = "Preenchimento obrigatório")
-	@Length(min = 5, max = 40, message = "A campo deve conter entre 5 e 40 caracteres")
+	@Length(max = 40, message = "A campo deve conter no máximo 40 caracteres")
 	private String email;
 	private Boolean active;
 	

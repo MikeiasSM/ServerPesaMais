@@ -44,10 +44,11 @@ public class UserService {
 	}
 	
 	public User update(User obj) {
-		findById(obj.getId_user());
-		return repository.save(obj);
+		User newObj = findById(obj.getId_user());
+		updateData(newObj, obj);
+		return repository.save(newObj);
 	}
-	
+		
 	public void delete(Integer id) {
 		findById(id);
 		try {
@@ -61,4 +62,11 @@ public class UserService {
 		return new User(userDTO.getId_user(), userDTO.getName(), userDTO.getPassword(), userDTO.getEmail(), userDTO.getActive());
 	}
 	
+	private void updateData(User newObj, User obj) {
+		newObj.setId_user(obj.getId_user());
+		newObj.setName(obj.getName());
+		newObj.setEmail(obj.getEmail());
+		newObj.setPassword(obj.getPassword());
+		newObj.setActive(obj.getActive());
+	}
 }

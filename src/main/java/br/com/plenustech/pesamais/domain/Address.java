@@ -9,12 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.plenustech.pesamais.domain.enums.TypeAddress;
 
 @Entity
+@Table(name = "ENDERECO")
 public class Address implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -31,7 +33,7 @@ public class Address implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "id_city")
 	private City city;
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_person")
 	private Person person;

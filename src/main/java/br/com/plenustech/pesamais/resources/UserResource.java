@@ -28,7 +28,7 @@ public class UserResource {
 	@Autowired
 	private UserService service;
 
-	@RequestMapping(value="{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	public ResponseEntity<User> find(@PathVariable Integer id) {		
 		User user = service.findById(id);		
 		return ResponseEntity.ok(user);
